@@ -14,12 +14,18 @@ typedef struct {
 
 void ShowMenu()
 {
-
+    printf("\n-------- Вгадай слово --------\n");
+    printf("1 - Нова гра\n");
+    printf("2 - Правила\n");
+    printf("3 - Інформація\n");
+    printf("4 - Додати нове слово\n");
+    printf("5 - Рахунок\n");
+    printf("6 - Переглянути слова у файлі\n");
+    printf("7 - Вийти\n");
+    printf("-----------------------------\n");
 }
 
 void printGuesssedWord()
-{
-
 {
 
 }
@@ -51,5 +57,44 @@ User AuthenticateUser()
 
 int main()
 {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    setlocale(LC_ALL, ".1251");
 
+    int n;
+
+    m:
+    ShowMenu();
+
+    switch (n)
+    {
+        case 1:
+            //
+            goto m;
+            break;
+        case 2:
+            //
+            goto m;
+            break;
+        case 3:
+            //
+            goto m;
+            break;
+        case 4:
+            //
+            goto m;
+            break;
+        case 5:
+           //
+            goto m;
+            break;
+        case 6:
+            //
+            goto m;
+            break;
+        case 7:
+            exit(0);
+            break;
+    }
+    return 0;
 }
