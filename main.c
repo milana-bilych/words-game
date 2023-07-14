@@ -58,7 +58,15 @@ void UpdateScore()
 
 void ShowWords()
 {
-
+    FILE *wordFile;
+    wordFile = fopen("words.txt", "r");
+    if (wordFile == NULL)
+    {
+        printf("No words found!\n");
+        return;
+    }
+   
+    fclose(wordFile);
 }
 
 User AuthenticateUser()
