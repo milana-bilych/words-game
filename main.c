@@ -55,9 +55,18 @@ void ShowScores()
     fclose(scoreFile);
 }
 
-void UpdateScore()
+void UpdateScore(User user)
 {
+    FILE *scoreFile;
+    scoreFile = fopen("scores.txt", "a");
+    if (scoreFile == NULL)
+    {
+        printf("Помилка відкриття файлу!\n");
+        return;
+    }
 
+    fprintf(scoreFile, "Ім'я: %s, Рекорд: %d\n", user.username, user.score);
+    fclose(scoreFile);
 }
 
 void ShowWords()
