@@ -42,7 +42,7 @@ void ShowScores()
     scoreFile = fopen("scores.txt", "r");
     if (scoreFile == NULL)
     {
-        printf("Рекордів не знайдено!\n");
+        printf("Помилка відкриття файлу!\n");
         return;
     }
     printf("\Рекорди:\n");
