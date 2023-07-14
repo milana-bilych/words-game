@@ -38,7 +38,13 @@ void drawMan()
 
 void ShowScores()
 {
-
+    FILE *scoreFile;
+    scoreFile = fopen("scores.txt", "r");
+    if (scoreFile == NULL)
+    {
+        printf("Рекордів не знайдено!\n");
+        return;
+    }
 }
 
 void UpdateScore()
