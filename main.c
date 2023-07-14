@@ -25,9 +25,20 @@ void ShowMenu()
     printf("-----------------------------\n");
 }
 
-void printGuesssedWord()
+void printGuesssedWord(char *word, int *status)
 {
-
+ printf("\n");
+  for (int i = 0; i < strlen(word); i++)
+    {
+        if (status[i] == 1)
+        {
+            printf("%c ", word[i]);
+        }
+        else
+        {
+            printf("_ ");
+        }
+    }  
 }
 
 void drawMan()
@@ -47,7 +58,20 @@ void UpdateScore()
 
 void ShowWords()
 {
-
+    FILE *wordFile;
+    wordFile = fopen("words.txt", "r");
+    if (wordFile == NULL)
+    {
+        printf("No words found!\n");
+        return;
+    }
+        printf("\nWords:\n");
+    char word[256];
+    while (fgets(word, sizeof(word), wordFile))
+    {
+        printf("%s", word);
+    }
+    fclose(wordFile);
 }
 
 User AuthenticateUser()
