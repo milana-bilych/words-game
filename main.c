@@ -45,6 +45,14 @@ void ShowScores()
         printf("Рекордів не знайдено!\n");
         return;
     }
+    printf("\Рекорди:\n");
+    char line[256];
+    while (fgets(line, sizeof(line), scoreFile))
+    {
+        printf("%s", line);
+    }
+
+    fclose(scoreFile);
 }
 
 void UpdateScore()
