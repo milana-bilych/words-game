@@ -65,7 +65,12 @@ void ShowWords()
         printf("No words found!\n");
         return;
     }
-   
+        printf("\nWords:\n");
+    char word[256];
+    while (fgets(word, sizeof(word), wordFile))
+    {
+        printf("%s", word);
+    }
     fclose(wordFile);
 }
 
