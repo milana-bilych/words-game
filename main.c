@@ -9,7 +9,8 @@
 #include <ctype.h>
 
 typedef struct {
-
+    char username[30];
+    int score;
 } User;
 
 void ShowMenu()
