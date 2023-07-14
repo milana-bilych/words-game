@@ -30,9 +30,13 @@ void printGuesssedWord()
 
 }
 
-void drawMan()
+void drawMan(int lives)
 {
-
+    char *body[] = {" ", "  0", "  0\n  |", "  0\n /|", "  0\n /|\\", "  0\n /|\\\n /", "  0\n /|\\\n / \\"};
+    int b = 7;
+    if (lives > 0)
+        printf("%s\n", body[b - lives]);
+    b++;
 }
 
 void ShowScores()
