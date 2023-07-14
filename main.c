@@ -25,9 +25,20 @@ void ShowMenu()
     printf("-----------------------------\n");
 }
 
-void printGuesssedWord()
+void printGuesssedWord(char *word, int *status)
 {
-
+ printf("\n");
+  for (int i = 0; i < strlen(word); i++)
+    {
+        if (status[i] == 1)
+        {
+            printf("%c ", word[i]);
+        }
+        else
+        {
+            printf("_ ");
+        }
+    }  
 }
 
 void drawMan()
