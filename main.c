@@ -9,7 +9,8 @@
 #include <ctype.h>
 
 typedef struct {
-
+    char username[30];
+    int score;
 } User;
 
 void ShowMenu()
@@ -48,12 +49,35 @@ void drawMan()
 
 void ShowScores()
 {
+    FILE *scoreFile;
+    scoreFile = fopen("scores.txt", "r");
+    if (scoreFile == NULL)
+    {
+        printf("Помилка відкриття файлу!\n");
+        return;
+    }
+    printf("\Рекорди:\n");
+    char line[256];
+    while (fgets(line, sizeof(line), scoreFile))
+    {
+        printf("%s", line);
+    }
 
+    fclose(scoreFile);
 }
 
-void UpdateScore()
+void UpdateScore(User user)
 {
+    FILE *scoreFile;
+    scoreFile = fopen("scores.txt", "a");
+    if (scoreFile == NULL)
+    {
+        printf("Помилка відкриття файлу!\n");
+        return;
+    }
 
+    fprintf(scoreFile, "Ім'я: %s, Рекорд: %d\n", user.username, user.score);
+    fclose(scoreFile);
 }
 
 void ShowWords()
