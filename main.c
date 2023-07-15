@@ -104,7 +104,16 @@ void ShowWords()
 
 User AuthenticateUser()
 {
+    User user;
 
+    printf("Enter username: ");
+    scanf("%s", user.username);
+
+    // You can prompt for password and perform validation if needed
+
+    user.score = 0; // Initialize the score for the user
+
+    return user;
 }
 
 int main()
