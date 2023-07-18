@@ -8,6 +8,8 @@
 #include <conio.h>
 #include <ctype.h>
 
+#define FILE_ERROR_MESSAGE "Помилка завантаження файлу!\n"
+
 typedef struct {
     char username[30];
     int score;
@@ -67,7 +69,7 @@ void ShowScores()
     scoreFile = fopen("scores.txt", "r");
     if (scoreFile == NULL)
     {
-        printf("Помилка завантаження файлу!\n");
+        printf(FILE_ERROR_MESSAGE);
         return;
     }
     printf("\Рекорди:\n");
@@ -86,7 +88,7 @@ void UpdateScore(User user)
     scoreFile = fopen("scores.txt", "a");
     if (scoreFile == NULL)
     {
-        printf("Помилка завантаження файлу!\n");
+        printf(FILE_ERROR_MESSAGE);
         return;
     }
 
@@ -100,7 +102,7 @@ void ShowWords()
     wordFile = fopen("words.txt", "r");
     if (wordFile == NULL)
     {
-        printf("Помилка завантаження файлу!\n");
+        printf(FILE_ERROR_MESSAGE);
         return;
     }
         printf("\nСлова:\n");
@@ -127,7 +129,7 @@ int main()
     FILE *file;
     if ((file = fopen("words.txt", "r")) == NULL)
     {
-        printf("Помилка завантаження файлу!");
+        printf(FILE_ERROR_MESSAGE);
         return 0;
     }
     char words[256][256];
@@ -145,7 +147,7 @@ int main()
     int n;
     char wor[30];
     
-    User user; // Declare a User structure to store authenticated user
+    User user; 
     bool exitGame = false;
     while (!exitGame)
     {
