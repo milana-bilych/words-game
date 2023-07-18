@@ -114,7 +114,12 @@ void ShowWords()
 
 User AuthenticateUser()
 {
+    User user;
 
+    printf("Enter username: ");
+    scanf("%s", user.username);
+
+    return user;
 }
 
 int main()
