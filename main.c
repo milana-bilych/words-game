@@ -124,6 +124,23 @@ int main()
     setlocale(LC_ALL, ".1251");
     srand(time(NULL));
 
+    FILE *file;
+    if ((file = fopen("words.txt", "r")) == NULL)
+    {
+        printf("Помилка завантаження файлу!");
+        return 0;
+    }
+    char words[256][256];
+    int j = 0;
+
+    while (fgets(words[j], 256, file) != NULL)
+    {
+        sscanf(words[j], "%s", words[j]);
+        j++;
+    }
+    fclose(file);
+    printf("Кількість зчитаних з файлу слів: %d", j);
+    
     int s;
     int n;
     char wor[30];
