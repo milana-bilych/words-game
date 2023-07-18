@@ -145,7 +145,13 @@ int main()
             printf("Тема є досить важливою, оскільки вона покращує важливі якості та навички в простому для гри форматі.");
             break;
         case 4:
-            //
+            printf("Введіть слово, яке хочете додати до файлу: \n");
+            file = fopen("words.txt", "a");
+            if (file != NULL) {
+                scanf("%s", wor);
+                fprintf(file, "%s\n", wor);
+            }
+            fclose(file);
             break;
         case 5:
            //
