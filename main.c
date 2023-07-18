@@ -223,7 +223,8 @@ int main()
             fclose(file);
             break;
         case 5:
-           //
+           system("cls");
+            ShowScores();
             break;
         case 6:
             //
