@@ -42,6 +42,16 @@ void printGuesssedWord(char *word, int *status)
     }  
 }
 
+bool victoryStatus(int *arr, int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        if (arr[i] == 0)
+            return false;
+    }
+    return true;
+}
+
 void drawMan(int lives)
 {
     char *body[] = {" ", "  0", "  0\n  |", "  0\n /|", "  0\n /|\\", "  0\n /|\\\n /", "  0\n /|\\\n / \\"};
