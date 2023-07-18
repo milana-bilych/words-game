@@ -109,10 +109,6 @@ User AuthenticateUser()
     printf("Enter username: ");
     scanf("%s", user.username);
 
-    // You can prompt for password and perform validation if needed
-
-    user.score = 0; // Initialize the score for the user
-
     return user;
 }
 
