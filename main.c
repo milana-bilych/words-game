@@ -122,15 +122,84 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
     setlocale(LC_ALL, ".1251");
+    srand(time(NULL));
 
+    int s;
     int n;
+    char wor[30];
+    
+    User user; // Declare a User structure to store authenticated user
+    bool exitGame = false;
+    while (!exitGame)
+    {
+        ShowMenu();
+        scanf("%i", &n);
 
-    ShowMenu();
-
-    switch (n)
+    switch (n) 
     {
         case 1:
-            //
+
+            while (s != 27) {
+                char alreadyUsedLetters[100] = "";
+                char *totalWord = words[rand() % j];
+                int *wordStatus = (int *) malloc(strlen(totalWord) * sizeof(int));
+                memset(wordStatus, 0, sizeof(int) * strlen(totalWord));
+                char c;
+                int lives = 6;
+                bool guessed = true;
+                int score = 0;
+
+                while (lives > 0) {
+                    for (int i = 0; i < strlen(totalWord); i++) {
+                        if (c == totalWord[i]) {
+                            wordStatus[i] = 1;
+                            guessed = true;
+                        }
+                    }
+
+                    if (!guessed) {
+                        lives--;
+                    }
+                    drawMan(lives + 1);
+                    printGuesssedWord(totalWord, wordStatus);
+                    if (victoryStatus(wordStatus, strlen(totalWord))) {
+                        printf("\nПЕРЕМОГА! :)\nЗагадане слово: %s \n", totalWord);
+                        score += 10;
+                        break;
+                    }
+
+                    printf("\nКількісь спроб: %d\n", lives);
+                    if (lives > 0) {
+                        printf("Введіть букву: ");
+                        c = getchar();
+                        scanf("%c", &c);
+
+                        if (strchr(alreadyUsedLetters, c)) {
+                            printf("Ви вже вводили цю букву! Спробуйте ще раз: ");
+                            c = getchar();
+                            scanf("%c", &c);
+                        }
+
+                        if (!strchr(alreadyUsedLetters, c))
+                            alreadyUsedLetters[strlen(alreadyUsedLetters)] = c;
+                    }
+
+                    system("cls");
+                    guessed = false;
+                }
+
+                if (lives == 0) {
+                    printf("\nВИ ПРОГРАЛИ! :( \nЗагадане слово: %s\n", totalWord);
+                }
+                printf("Ваша оцінка: %d\n", score);
+                user.score = score; // Update the score for the authenticated user
+                UpdateScore(user); // Update the score for the authenticated user
+                c = 0;
+                alreadyUsedLetters[0] = '\0';
+                printf("Для продовження натисніть будь-яку клавішу, або ESC для виходу...\n");
+                s = getch();
+            }
+            return 0;
             break;
         case 2:
             system("cls");
@@ -162,6 +231,7 @@ int main()
         case 7:
             exit(0);
             break;
+    }
     }
     return 0;
 }
