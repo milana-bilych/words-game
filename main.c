@@ -143,22 +143,22 @@ int main()
     fclose(file);
     printf("Кількість зчитаних з файлу слів: %d", j);
     
-    int s;
-    int n;
-    char wor[30];
+    int key;
+    int option;
+    char newWord[30];
     
     User user; 
     bool exitGame = false;
     while (!exitGame)
     {
         ShowMenu();
-        scanf("%i", &n);
+        scanf("%i", &option);
 
-    switch (n) 
+    switch (option) 
     {
         case 1:
 
-            while (s != 27) {
+            while (key != 27) {
                 char alreadyUsedLetters[100] = "";
                 char *totalWord = words[rand() % j];
                 int *wordStatus = (int *) malloc(strlen(totalWord) * sizeof(int));
@@ -216,7 +216,7 @@ int main()
                 c = 0;
                 alreadyUsedLetters[0] = '\0';
                 printf("Для продовження натисніть будь-яку клавішу, або ESC для виходу...\n");
-                s = getch();
+                key = getch();
             }
             return 0;
             break;
@@ -236,8 +236,8 @@ int main()
             printf("Введіть слово, яке хочете додати до файлу: \n");
             file = fopen("words.txt", "a");
             if (file != NULL) {
-                scanf("%s", wor);
-                fprintf(file, "%s\n", wor);
+                scanf("%s", newWord);
+                fprintf(file, "%s\n", newWord);
             }
             fclose(file);
             break;
