@@ -227,7 +227,8 @@ int main()
             ShowScores();
             break;
         case 6:
-            //
+            system("cls");
+            ShowWords();
             break;
         case 7:
             exit(0);
