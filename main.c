@@ -67,7 +67,7 @@ void ShowScores()
     scoreFile = fopen("scores.txt", "r");
     if (scoreFile == NULL)
     {
-        printf("Помилка відкриття файлу!\n");
+        printf("Помилка завантаження файлу!\n");
         return;
     }
     printf("\Рекорди:\n");
@@ -86,7 +86,7 @@ void UpdateScore(User user)
     scoreFile = fopen("scores.txt", "a");
     if (scoreFile == NULL)
     {
-        printf("Помилка відкриття файлу!\n");
+        printf("Помилка завантаження файлу!\n");
         return;
     }
 
@@ -100,10 +100,10 @@ void ShowWords()
     wordFile = fopen("words.txt", "r");
     if (wordFile == NULL)
     {
-        printf("No words found!\n");
+        printf("Помилка завантаження файлу!\n");
         return;
     }
-        printf("\nWords:\n");
+        printf("\nСлова:\n");
     char word[256];
     while (fgets(word, sizeof(word), wordFile))
     {
