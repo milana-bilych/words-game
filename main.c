@@ -72,7 +72,7 @@ void ShowScores()
         printf(FILE_ERROR_MESSAGE);
         return;
     }
-    printf("\Рекорди:\n");
+    printf("\nРекорди:\n");
     char line[256];
     while (fgets(line, sizeof(line), scoreFile))
     {
