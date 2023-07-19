@@ -8,6 +8,8 @@
 #include <conio.h>
 #include <ctype.h>
 
+#define FILE_ERROR_MESSAGE "Помилка завантаження файлу!\n"
+
 typedef struct {
     char username[30];
     int score;
@@ -67,7 +69,7 @@ void ShowScores()
     scoreFile = fopen("scores.txt", "r");
     if (scoreFile == NULL)
     {
-        printf("Помилка відкриття файлу!\n");
+        printf(FILE_ERROR_MESSAGE);
         return;
     }
     printf("\Рекорди:\n");
@@ -86,7 +88,7 @@ void UpdateScore(User user)
     scoreFile = fopen("scores.txt", "a");
     if (scoreFile == NULL)
     {
-        printf("Помилка відкриття файлу!\n");
+        printf(FILE_ERROR_MESSAGE);
         return;
     }
 
@@ -100,10 +102,10 @@ void ShowWords()
     wordFile = fopen("words.txt", "r");
     if (wordFile == NULL)
     {
-        printf("No words found!\n");
+        printf(FILE_ERROR_MESSAGE);
         return;
     }
-        printf("\nWords:\n");
+        printf("\nСлова:\n");
     char word[256];
     while (fgets(word, sizeof(word), wordFile))
     {
@@ -127,15 +129,101 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
     setlocale(LC_ALL, ".1251");
+    srand(time(NULL));
 
-    int n;
+    FILE *file;
+    if ((file = fopen("words.txt", "r")) == NULL)
+    {
+        printf(FILE_ERROR_MESSAGE);
+        return 0;
+    }
+    char words[256][256];
+    int j = 0;
 
-    ShowMenu();
+    while (fgets(words[j], 256, file) != NULL)
+    {
+        sscanf(words[j], "%s", words[j]);
+        j++;
+    }
+    fclose(file);
+    printf("Кількість зчитаних з файлу слів: %d", j);
+    
+    int key;
+    int option;
+    char newWord[30];
+    
+    User user; 
+    bool exitGame = false;
+    while (!exitGame)
+    {
+        ShowMenu();
+        scanf("%i", &option);
 
-    switch (n)
+    switch (option) 
     {
         case 1:
-            //
+
+            while (key != 27) {
+                char alreadyUsedLetters[100] = "";
+                char *totalWord = words[rand() % j];
+                int *wordStatus = (int *) malloc(strlen(totalWord) * sizeof(int));
+                memset(wordStatus, 0, sizeof(int) * strlen(totalWord));
+                char c;
+                int lives = 6;
+                bool guessed = true;
+                int score = 0;
+
+                while (lives > 0) {
+                    for (int i = 0; i < strlen(totalWord); i++) {
+                        if (c == totalWord[i]) {
+                            wordStatus[i] = 1;
+                            guessed = true;
+                        }
+                    }
+
+                    if (!guessed) {
+                        lives--;
+                    }
+                    drawMan(lives + 1);
+                    printGuesssedWord(totalWord, wordStatus);
+                    if (victoryStatus(wordStatus, strlen(totalWord))) {
+                        printf("\nПЕРЕМОГА! :)\nЗагадане слово: %s \n", totalWord);
+                        score += 10;
+                        break;
+                    }
+
+                    printf("\nКількісь спроб: %d\n", lives);
+                    if (lives > 0) {
+                        printf("Введіть букву: ");
+                        c = getchar();
+                        scanf("%c", &c);
+
+                        if (strchr(alreadyUsedLetters, c)) {
+                            printf("Ви вже вводили цю букву! Спробуйте ще раз: ");
+                            c = getchar();
+                            scanf("%c", &c);
+                        }
+
+                        if (!strchr(alreadyUsedLetters, c))
+                            alreadyUsedLetters[strlen(alreadyUsedLetters)] = c;
+                    }
+
+                    system("cls");
+                    guessed = false;
+                }
+
+                if (lives == 0) {
+                    printf("\nВИ ПРОГРАЛИ! :( \nЗагадане слово: %s\n", totalWord);
+                }
+                printf("Ваша оцінка: %d\n", score);
+                user.score = score; // Update the score for the authenticated user
+                UpdateScore(user); // Update the score for the authenticated user
+                c = 0;
+                alreadyUsedLetters[0] = '\0';
+                printf("Для продовження натисніть будь-яку клавішу, або ESC для виходу...\n");
+                key = getch();
+            }
+            return 0;
             break;
         case 2:
             system("cls");
@@ -150,17 +238,26 @@ int main()
             printf("Тема є досить важливою, оскільки вона покращує важливі якості та навички в простому для гри форматі.");
             break;
         case 4:
-            //
+            printf("Введіть слово, яке хочете додати до файлу: \n");
+            file = fopen("words.txt", "a");
+            if (file != NULL) {
+                scanf("%s", newWord);
+                fprintf(file, "%s\n", newWord);
+            }
+            fclose(file);
             break;
         case 5:
-           //
+           system("cls");
+            ShowScores();
             break;
         case 6:
-            //
+            system("cls");
+            ShowWords();
             break;
         case 7:
             exit(0);
             break;
+    }
     }
     return 0;
 }
